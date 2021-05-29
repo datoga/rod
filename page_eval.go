@@ -119,6 +119,7 @@ func (e *EvalOptions) ByPromise() *EvalOptions {
 
 func (e *EvalOptions) formatToJSFunc() string {
 	js := strings.TrimSpace(e.JS)
+	js = e.JS
 	if detectJSFunction(js) {
 		return fmt.Sprintf(`function() { return (%s).apply(this, arguments) }`, js)
 	}
@@ -167,7 +168,7 @@ func (p *Page) evaluate(opts *EvalOptions) (*proto.RuntimeRemoteObject, error) {
 		AwaitPromise:        opts.AwaitPromise,
 		ReturnByValue:       opts.ByValue,
 		UserGesture:         opts.UserGesture,
-		FunctionDeclaration: opts.JS,
+		FunctionDeclaration: opts.formatToJSFunc(),
 		Arguments:           args,
 	}
 
