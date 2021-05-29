@@ -167,7 +167,7 @@ func (p *Page) evaluate(opts *EvalOptions) (*proto.RuntimeRemoteObject, error) {
 		AwaitPromise:        opts.AwaitPromise,
 		ReturnByValue:       opts.ByValue,
 		UserGesture:         opts.UserGesture,
-		FunctionDeclaration: opts.formatToJSFunc(),
+		FunctionDeclaration: opts.JS,
 		Arguments:           args,
 	}
 
